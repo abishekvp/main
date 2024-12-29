@@ -1,3 +1,6 @@
+import jwt
+from datetime import datetime, timedelta
+from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -101,3 +104,11 @@ def delete_user(request):
         return JsonResponse({'status_code': 404, 'message': 'User not found'})
     user.delete()
     return JsonResponse({'status_code': 200, 'message': 'User deleted'})
+
+
+from rest_framework_simplejwt.tokens import AccessToken
+
+def generate_jwt_token(user):
+    # Generate JWT token for the given user
+    token = AccessToken.for_user(user)
+    return token
