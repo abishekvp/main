@@ -6,6 +6,8 @@
     <title>AbirajVP - Site Manager Admin</title>
 </head>
 <body>
-    
+    {% for log in call_logs %}
+    <p>{{ log.from_number }} - {{ log.to_number }} - {{ log.call_duration }}</p>
+    {% endfor %}
 </body>
 </html>

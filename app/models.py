@@ -9,3 +9,9 @@ class UserData(models.Model):
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class CallLog(models.Model):
+    from_number = models.CharField(max_length=16)
+    to_number = models.CharField(max_length=16)
+    call_duration = models.IntegerField()

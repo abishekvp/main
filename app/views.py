@@ -11,6 +11,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 
 # Create your views here.
+def index(request):
+    call_logs = []
+    from app.models import CallLog
+    call_logs = CallLog.objects.all()
+    return render(request, 'index.html', {'call_logs': call_logs})
+
 def signup(request):
     username = request.POST.get('username')
     email = request.POST.get('email')
@@ -112,3 +118,15 @@ def generate_jwt_token(user):
     # Generate JWT token for the given user
     token = AccessToken.for_user(user)
     return token
+
+
+@csrf_exempt
+def add_call_log(request):
+    from app.models import CallLog
+    from_number = request.POST.get('from_number')
+    to_number = request.POST.get('to_number')
+    call_duration = request.POST.get('duration')
+    if not from_number or not to_number or not call_duration:
+        return JsonResponse({'status_code': 400, 'message': 'Missing parameters'})
+    CallLog.objects.create(from_number=from_number, to_number=to_number, call_duration=call_duration)
+    return JsonResponse({'status_code': 200, 'message': 'Call log added'})
