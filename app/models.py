@@ -14,4 +14,4 @@ class UserData(models.Model):
 class CallLog(models.Model):
     from_number = models.CharField(max_length=16)
     to_number = models.CharField(max_length=16)
-    call_duration = models.IntegerField()
+    status = models.CharField(max_length=16)

@@ -20,4 +20,8 @@ urlpatterns = [
 
     # add call log
     path('add-call-log', csrf_exempt(views.add_call_log), name='add_call_log'),
+    path('fetch-call-log', views.fetch_call_log, name='fetch-call-log'),
+
+    # view
+    path('view-call-log', views.view_call_log, name='view_call_log'),
 ]
